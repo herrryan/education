@@ -78,12 +78,12 @@ docker build -t education-platform:latest .
 docker run -d \
   --name education-platform \
   --restart unless-stopped \
-  -p 3000:80 \
+  -p 8133:80 \
   education-platform:latest
 ```
 
 #### 3. 验证服务健康状态
 ```bash
-curl -I http://localhost:3000/healthz
+curl -I http://localhost:8133/healthz
 ```
 服务返回 `HTTP/1.1 200 OK` 且内容为 `healthy`。
