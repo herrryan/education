@@ -35,7 +35,13 @@ npm run build
 
 ### 方式一：使用 Docker Compose（推荐）
 
-#### 1. 一键启动容器
+#### 1. 一键拉取预构建镜像启动（推荐，由 GitHub Actions 自动构建）
+```bash
+docker compose pull
+docker compose up -d
+```
+
+#### 2. 本地源码重新构建启动
 ```bash
 docker compose up -d --build
 ```

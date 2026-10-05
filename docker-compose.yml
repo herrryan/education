@@ -1,9 +1,11 @@
+version: '3.0'
+
 services:
   education:
     build:
       context: .
       dockerfile: Dockerfile
-    image: education-platform:latest
+    image: ghcr.io/herrryan/education:latest
     container_name: education-platform
     restart: unless-stopped
     ports:
