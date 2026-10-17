@@ -7,11 +7,11 @@ const config: Config = {
   tagline: '权力结构、资源流转与利益交换的真实故事',
   favicon: 'img/favicon.ico',
 
-  url: 'https://tacit-knowledge.internal',
-  baseUrl: '/',
+  url: process.env.DOCUSAURUS_URL || 'https://herrryan.github.io',
+  baseUrl: process.env.DOCUSAURUS_BASE_URL || '/',
 
-  organizationName: 'tacit-knowledge',
-  projectName: 'curriculum',
+  organizationName: 'herrryan',
+  projectName: 'education',
 
   onBrokenLinks: 'throw',
 
