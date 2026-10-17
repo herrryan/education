@@ -10,10 +10,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   packages: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
@@ -21,7 +19,7 @@ concurrency:
 
 jobs:
   verify:
-    name: Verify Docusaurus Build & Upload Pages Artifact
+    name: Build & Deploy Docusaurus to GitHub Pages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -42,29 +40,12 @@ jobs:
           DOCUSAURUS_BASE_URL: /education/
         run: npm run build
 
-      - name: Upload Pages Artifact
+      - name: Deploy to GitHub Pages (gh-pages branch)
         if: github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: build
-
-  pages:
-    name: Deploy to GitHub Pages
-    needs: verify
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
 
   docker:
     name: Build and Push Docker Image
