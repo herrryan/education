@@ -9,7 +9,7 @@ services:
     container_name: education-platform
     restart: unless-stopped
     ports:
-      - "${PORT:-8133}:80"
+      - "127.0.0.1:${PORT:-8133}:80"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
       interval: 30s
